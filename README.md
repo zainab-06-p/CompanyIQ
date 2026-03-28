@@ -102,12 +102,81 @@ Then set Vercel env variable:
 
 Detailed steps are in `DEPLOY_RENDER_BACKEND.md`.
 
+## Clone And Run (Quick Start)
+
+### 1. Clone repository
+
+```bash
+git clone https://github.com/zainab-06-p/CompanyIQ.git
+cd CompanyIQ
+```
+
+### 2. Install dependencies
+
+```bash
+npm install
+npm install --prefix backend
+npm install --prefix frontend
+```
+
+### 3. Configure backend environment
+
+```bash
+cp backend/.env.example backend/.env
+```
+
+Then edit `backend/.env` and set your real credentials.
+
+### 4. Run locally
+
+```bash
+npm run dev
+```
+
+Default local endpoints:
+
+- Frontend: http://localhost:5173
+- Backend health: http://localhost:3001/api/health
+
 ## Tech Stack
 
 - Backend: Node.js (ESM), Express
 - Frontend: React, TypeScript, Vite
 - Storage: SQLite (better-sqlite3)
 - Data orchestration: TinyFish API + local scoring pipeline
+
+## Environment Variables (Backend)
+
+Required for core flow:
+
+- `TINYFISH_API_KEY`
+- `APP_URL` (local: `http://localhost:5173`, production: your frontend URL)
+
+Recommended for full feature set:
+
+- `RAZORPAY_KEY_ID`
+- `RAZORPAY_KEY_SECRET`
+- `SUPABASE_URL`
+- `SUPABASE_ANON_KEY`
+- `SUPABASE_SERVICE_ROLE_KEY`
+
+Operational controls:
+
+- `TINYFISH_RETRIES`
+- `TINYFISH_TIMEOUT_MS`
+- `TINYFISH_BUDGET_ENABLED`
+- `TINYFISH_BUDGET_FREE_SCORE_CALLS`
+- `TINYFISH_BUDGET_QUICK_SCAN_CALLS`
+- `TINYFISH_BUDGET_STANDARD_CALLS`
+- `FAST_MODE`
+- `MAX_REPORT_MS`
+- `FAST_AGENT_TIMEOUT_MS`
+- `BACKGROUND_HYDRATION`
+
+Cross-origin settings:
+
+- `CORS_ORIGINS` (comma-separated list)
+- `ALLOW_VERCEL_PREVIEWS`
 
 ## Local Development Setup
 
@@ -143,6 +212,8 @@ TINYFISH_BUDGET_ENABLED=true
 TINYFISH_BUDGET_FREE_SCORE_CALLS=6
 TINYFISH_BUDGET_QUICK_SCAN_CALLS=10
 TINYFISH_BUDGET_STANDARD_CALLS=16
+CORS_ORIGINS=http://localhost:5173,http://localhost:3000
+ALLOW_VERCEL_PREVIEWS=true
 ```
 
 Security note: Never commit real API keys.
@@ -170,6 +241,39 @@ This command starts both:
 6. Engine layer validates and scores extracted signals.
 7. System produces composite output, red flags, and narrative insights.
 8. Final report is returned and displayed.
+
+## Production Setup (Vercel + Render)
+
+Use this architecture for long TinyFish workloads:
+
+- Frontend on Vercel
+- Backend on Render
+
+### Backend (Render)
+
+1. Create a Render Blueprint from this repository.
+2. Render auto-detects `render.yaml`.
+3. Set required secret env values in Render dashboard.
+4. Confirm backend health endpoint is reachable.
+
+### Frontend (Vercel)
+
+Set Vercel env var:
+
+`VITE_API_BASE=https://<your-render-service>.onrender.com/api`
+
+Then redeploy Vercel.
+
+### Why this split is required
+
+TinyFish flows can be long-running and may exceed strict serverless request windows. Render backend avoids that request-time cap for sustained extraction tasks.
+
+## Troubleshooting
+
+- `Low confidence` and `0 steps` in report metadata usually means TinyFish calls did not complete.
+- If frontend cannot call backend in browser, verify `CORS_ORIGINS` includes your frontend domain.
+- If auth/history features fail, verify Supabase keys and URL.
+- If report generation is slow on free hosting, check for cold starts and TinyFish source-site latency.
 
 ## Security and Operations Notes
 
