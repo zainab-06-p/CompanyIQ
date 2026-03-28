@@ -1,0 +1,27 @@
+{
+  "name": "companyiq-backend",
+  "version": "1.0.0",
+  "description": "CompanyIQ — AI-Powered Company Due Diligence Agent Backend",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.99.1",
+    "bcryptjs": "^3.0.3",
+    "better-sqlite3": "^12.6.2",
+    "cors": "^2.8.5",
+    "csv-parse": "^6.2.1",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "express-rate-limit": "^7.1.4",
+    "groq-sdk": "^0.8.0",
+    "jsonwebtoken": "^9.0.3",
+    "node-cache": "^5.1.2",
+    "node-fetch": "^3.3.2",
+    "razorpay": "^2.9.2",
+    "string-similarity": "^4.0.4"
+  }
+}

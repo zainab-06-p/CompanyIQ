@@ -1,0 +1,802 @@
+[
+  {
+    "name": "Zomato Ltd",
+    "ticker": "ZOMATO",
+    "bseCode": "543320",
+    "nseSymbol": "ZOMATO",
+    "sector": "Internet & Technology",
+    "industry": "Food Delivery / Quick Commerce",
+    "screenerSlug": "ZOMATO/consolidated",
+    "aliases": ["zomato", "zomato limited", "zomato ltd"]
+  },
+  {
+    "name": "Tata Consultancy Services Ltd",
+    "ticker": "TCS",
+    "bseCode": "532540",
+    "nseSymbol": "TCS",
+    "sector": "Information Technology",
+    "industry": "IT Services & Consulting",
+    "screenerSlug": "TCS/consolidated",
+    "aliases": ["tcs", "tata consultancy", "tata consultancy services"]
+  },
+  {
+    "name": "Reliance Industries Ltd",
+    "ticker": "RELIANCE",
+    "bseCode": "500325",
+    "nseSymbol": "RELIANCE",
+    "sector": "Conglomerate",
+    "industry": "Oil & Gas / Telecom / Retail",
+    "screenerSlug": "RELIANCE/consolidated",
+    "aliases": ["reliance", "reliance industries", "ril"]
+  },
+  {
+    "name": "HDFC Bank Ltd",
+    "ticker": "HDFCBANK",
+    "bseCode": "500180",
+    "nseSymbol": "HDFCBANK",
+    "sector": "Banking & Finance",
+    "industry": "Private Sector Bank",
+    "screenerSlug": "HDFCBANK/consolidated",
+    "aliases": ["hdfc bank", "hdfcbank", "hdfc"]
+  },
+  {
+    "name": "Infosys Ltd",
+    "ticker": "INFY",
+    "bseCode": "500209",
+    "nseSymbol": "INFY",
+    "sector": "Information Technology",
+    "industry": "IT Services & Consulting",
+    "screenerSlug": "INFY/consolidated",
+    "aliases": ["infosys", "infy", "infosys limited"]
+  },
+  {
+    "name": "Bharti Airtel Ltd",
+    "ticker": "BHARTIARTL",
+    "bseCode": "532454",
+    "nseSymbol": "BHARTIARTL",
+    "sector": "Telecom",
+    "industry": "Telecom Services",
+    "screenerSlug": "BHARTIARTL/consolidated",
+    "aliases": ["airtel", "bharti airtel", "bhartiartl"]
+  },
+  {
+    "name": "ITC Ltd",
+    "ticker": "ITC",
+    "bseCode": "500875",
+    "nseSymbol": "ITC",
+    "sector": "FMCG",
+    "industry": "Tobacco / FMCG / Hotels",
+    "screenerSlug": "ITC/consolidated",
+    "aliases": ["itc", "itc limited"]
+  },
+  {
+    "name": "State Bank of India",
+    "ticker": "SBIN",
+    "bseCode": "500112",
+    "nseSymbol": "SBIN",
+    "sector": "Banking & Finance",
+    "industry": "Public Sector Bank",
+    "screenerSlug": "SBIN/consolidated",
+    "aliases": ["sbi", "state bank", "state bank of india"]
+  },
+  {
+    "name": "ICICI Bank Ltd",
+    "ticker": "ICICIBANK",
+    "bseCode": "532174",
+    "nseSymbol": "ICICIBANK",
+    "sector": "Banking & Finance",
+    "industry": "Private Sector Bank",
+    "screenerSlug": "ICICIBANK/consolidated",
+    "aliases": ["icici", "icici bank"]
+  },
+  {
+    "name": "Hindustan Unilever Ltd",
+    "ticker": "HINDUNILVR",
+    "bseCode": "500696",
+    "nseSymbol": "HINDUNILVR",
+    "sector": "FMCG",
+    "industry": "Personal Care / Home Care",
+    "screenerSlug": "HINDUNILVR/consolidated",
+    "aliases": ["hul", "hindustan unilever", "hindunilvr"]
+  },
+  {
+    "name": "Wipro Ltd",
+    "ticker": "WIPRO",
+    "bseCode": "507685",
+    "nseSymbol": "WIPRO",
+    "sector": "Information Technology",
+    "industry": "IT Services & Consulting",
+    "screenerSlug": "WIPRO/consolidated",
+    "aliases": ["wipro", "wipro limited"]
+  },
+  {
+    "name": "Larsen & Toubro Ltd",
+    "ticker": "LT",
+    "bseCode": "500510",
+    "nseSymbol": "LT",
+    "sector": "Capital Goods",
+    "industry": "Engineering & Construction",
+    "screenerSlug": "LT/consolidated",
+    "aliases": ["l&t", "larsen", "larsen and toubro", "lt"]
+  },
+  {
+    "name": "HCL Technologies Ltd",
+    "ticker": "HCLTECH",
+    "bseCode": "532281",
+    "nseSymbol": "HCLTECH",
+    "sector": "Information Technology",
+    "industry": "IT Services & Consulting",
+    "screenerSlug": "HCLTECH/consolidated",
+    "aliases": ["hcl", "hcl tech", "hcltech"]
+  },
+  {
+    "name": "Sun Pharmaceutical Industries Ltd",
+    "ticker": "SUNPHARMA",
+    "bseCode": "524715",
+    "nseSymbol": "SUNPHARMA",
+    "sector": "Healthcare",
+    "industry": "Pharmaceuticals",
+    "screenerSlug": "SUNPHARMA/consolidated",
+    "aliases": ["sun pharma", "sunpharma", "sun pharmaceutical"]
+  },
+  {
+    "name": "Bajaj Finance Ltd",
+    "ticker": "BAJFINANCE",
+    "bseCode": "500034",
+    "nseSymbol": "BAJFINANCE",
+    "sector": "Banking & Finance",
+    "industry": "NBFC",
+    "screenerSlug": "BAJFINANCE/consolidated",
+    "aliases": ["bajaj finance", "bajfinance"]
+  },
+  {
+    "name": "Maruti Suzuki India Ltd",
+    "ticker": "MARUTI",
+    "bseCode": "532500",
+    "nseSymbol": "MARUTI",
+    "sector": "Automobile",
+    "industry": "Passenger Vehicles",
+    "screenerSlug": "MARUTI/consolidated",
+    "aliases": ["maruti", "maruti suzuki"]
+  },
+  {
+    "name": "Titan Company Ltd",
+    "ticker": "TITAN",
+    "bseCode": "500114",
+    "nseSymbol": "TITAN",
+    "sector": "Consumer Discretionary",
+    "industry": "Jewellery / Watches",
+    "screenerSlug": "TITAN/consolidated",
+    "aliases": ["titan", "titan company"]
+  },
+  {
+    "name": "Kotak Mahindra Bank Ltd",
+    "ticker": "KOTAKBANK",
+    "bseCode": "500247",
+    "nseSymbol": "KOTAKBANK",
+    "sector": "Banking & Finance",
+    "industry": "Private Sector Bank",
+    "screenerSlug": "KOTAKBANK/consolidated",
+    "aliases": ["kotak", "kotak bank", "kotak mahindra"]
+  },
+  {
+    "name": "Asian Paints Ltd",
+    "ticker": "ASIANPAINT",
+    "bseCode": "500820",
+    "nseSymbol": "ASIANPAINT",
+    "sector": "Consumer Discretionary",
+    "industry": "Decorative Paints",
+    "screenerSlug": "ASIANPAINT/consolidated",
+    "aliases": ["asian paints", "asianpaint"]
+  },
+  {
+    "name": "Axis Bank Ltd",
+    "ticker": "AXISBANK",
+    "bseCode": "532215",
+    "nseSymbol": "AXISBANK",
+    "sector": "Banking & Finance",
+    "industry": "Private Sector Bank",
+    "screenerSlug": "AXISBANK/consolidated",
+    "aliases": ["axis bank", "axisbank", "axis"]
+  },
+  {
+    "name": "Mahindra & Mahindra Ltd",
+    "ticker": "M&M",
+    "bseCode": "500520",
+    "nseSymbol": "M&M",
+    "sector": "Automobile",
+    "industry": "Utility Vehicles / Farm Equipment",
+    "screenerSlug": "M&M/consolidated",
+    "aliases": ["mahindra", "m&m", "mahindra and mahindra"]
+  },
+  {
+    "name": "Adani Enterprises Ltd",
+    "ticker": "ADANIENT",
+    "bseCode": "512599",
+    "nseSymbol": "ADANIENT",
+    "sector": "Conglomerate",
+    "industry": "Infrastructure / Mining / Energy",
+    "screenerSlug": "ADANIENT/consolidated",
+    "aliases": ["adani", "adani enterprises", "adanient"]
+  },
+  {
+    "name": "Tata Motors Ltd",
+    "ticker": "TATAMOTORS",
+    "bseCode": "500570",
+    "nseSymbol": "TATAMOTORS",
+    "sector": "Automobile",
+    "industry": "Commercial & Passenger Vehicles",
+    "screenerSlug": "TATAMOTORS/consolidated",
+    "aliases": ["tata motors", "tatamotors"]
+  },
+  {
+    "name": "Power Grid Corporation of India Ltd",
+    "ticker": "POWERGRID",
+    "bseCode": "532898",
+    "nseSymbol": "POWERGRID",
+    "sector": "Utilities",
+    "industry": "Power Transmission",
+    "screenerSlug": "POWERGRID/consolidated",
+    "aliases": ["power grid", "powergrid"]
+  },
+  {
+    "name": "NTPC Ltd",
+    "ticker": "NTPC",
+    "bseCode": "532555",
+    "nseSymbol": "NTPC",
+    "sector": "Utilities",
+    "industry": "Power Generation",
+    "screenerSlug": "NTPC/consolidated",
+    "aliases": ["ntpc", "ntpc limited"]
+  },
+  {
+    "name": "Tata Steel Ltd",
+    "ticker": "TATASTEEL",
+    "bseCode": "500470",
+    "nseSymbol": "TATASTEEL",
+    "sector": "Metals & Mining",
+    "industry": "Steel Manufacturing",
+    "screenerSlug": "TATASTEEL/consolidated",
+    "aliases": ["tata steel", "tatasteel"]
+  },
+  {
+    "name": "Ultratech Cement Ltd",
+    "ticker": "ULTRACEMCO",
+    "bseCode": "532538",
+    "nseSymbol": "ULTRACEMCO",
+    "sector": "Materials",
+    "industry": "Cement",
+    "screenerSlug": "ULTRACEMCO/consolidated",
+    "aliases": ["ultratech", "ultratech cement", "ultracemco"]
+  },
+  {
+    "name": "Tech Mahindra Ltd",
+    "ticker": "TECHM",
+    "bseCode": "532755",
+    "nseSymbol": "TECHM",
+    "sector": "Information Technology",
+    "industry": "IT Services & Consulting",
+    "screenerSlug": "TECHM/consolidated",
+    "aliases": ["tech mahindra", "techm"]
+  },
+  {
+    "name": "Bajaj Auto Ltd",
+    "ticker": "BAJAJ-AUTO",
+    "bseCode": "532977",
+    "nseSymbol": "BAJAJ-AUTO",
+    "sector": "Automobile",
+    "industry": "Two-Wheelers",
+    "screenerSlug": "BAJAJ-AUTO/consolidated",
+    "aliases": ["bajaj auto", "bajaj-auto"]
+  },
+  {
+    "name": "Nestle India Ltd",
+    "ticker": "NESTLEIND",
+    "bseCode": "500790",
+    "nseSymbol": "NESTLEIND",
+    "sector": "FMCG",
+    "industry": "Packaged Foods",
+    "screenerSlug": "NESTLEIND/consolidated",
+    "aliases": ["nestle", "nestle india", "nestleind"]
+  },
+  {
+    "name": "IndusInd Bank Ltd",
+    "ticker": "INDUSINDBK",
+    "bseCode": "532187",
+    "nseSymbol": "INDUSINDBK",
+    "sector": "Banking & Finance",
+    "industry": "Private Sector Bank",
+    "screenerSlug": "INDUSINDBK/consolidated",
+    "aliases": ["indusind", "indusind bank"]
+  },
+  {
+    "name": "Tata Consumer Products Ltd",
+    "ticker": "TATACONSUM",
+    "bseCode": "500800",
+    "nseSymbol": "TATACONSUM",
+    "sector": "FMCG",
+    "industry": "Tea / Coffee / Consumer Products",
+    "screenerSlug": "TATACONSUM/consolidated",
+    "aliases": ["tata consumer", "tataconsum"]
+  },
+  {
+    "name": "Cipla Ltd",
+    "ticker": "CIPLA",
+    "bseCode": "500087",
+    "nseSymbol": "CIPLA",
+    "sector": "Healthcare",
+    "industry": "Pharmaceuticals",
+    "screenerSlug": "CIPLA/consolidated",
+    "aliases": ["cipla", "cipla limited"]
+  },
+  {
+    "name": "Divis Laboratories Ltd",
+    "ticker": "DIVISLAB",
+    "bseCode": "532488",
+    "nseSymbol": "DIVISLAB",
+    "sector": "Healthcare",
+    "industry": "Pharmaceuticals / API",
+    "screenerSlug": "DIVISLAB/consolidated",
+    "aliases": ["divis", "divis labs", "divislab"]
+  },
+  {
+    "name": "Grasim Industries Ltd",
+    "ticker": "GRASIM",
+    "bseCode": "500300",
+    "nseSymbol": "GRASIM",
+    "sector": "Materials",
+    "industry": "Cement / VSF / Chemicals",
+    "screenerSlug": "GRASIM/consolidated",
+    "aliases": ["grasim", "grasim industries"]
+  },
+  {
+    "name": "Eicher Motors Ltd",
+    "ticker": "EICHERMOT",
+    "bseCode": "505200",
+    "nseSymbol": "EICHERMOT",
+    "sector": "Automobile",
+    "industry": "Two-Wheelers / Commercial Vehicles",
+    "screenerSlug": "EICHERMOT/consolidated",
+    "aliases": ["eicher", "eicher motors", "royal enfield"]
+  },
+  {
+    "name": "Apollo Hospitals Enterprise Ltd",
+    "ticker": "APOLLOHOSP",
+    "bseCode": "508869",
+    "nseSymbol": "APOLLOHOSP",
+    "sector": "Healthcare",
+    "industry": "Hospitals & Healthcare Services",
+    "screenerSlug": "APOLLOHOSP/consolidated",
+    "aliases": ["apollo", "apollo hospitals"]
+  },
+  {
+    "name": "Britannia Industries Ltd",
+    "ticker": "BRITANNIA",
+    "bseCode": "500825",
+    "nseSymbol": "BRITANNIA",
+    "sector": "FMCG",
+    "industry": "Packaged Foods / Biscuits",
+    "screenerSlug": "BRITANNIA/consolidated",
+    "aliases": ["britannia", "britannia industries"]
+  },
+  {
+    "name": "Dr Reddy's Laboratories Ltd",
+    "ticker": "DRREDDY",
+    "bseCode": "500124",
+    "nseSymbol": "DRREDDY",
+    "sector": "Healthcare",
+    "industry": "Pharmaceuticals",
+    "screenerSlug": "DRREDDY/consolidated",
+    "aliases": ["dr reddy", "dr reddys", "drreddy"]
+  },
+  {
+    "name": "Hindalco Industries Ltd",
+    "ticker": "HINDALCO",
+    "bseCode": "500440",
+    "nseSymbol": "HINDALCO",
+    "sector": "Metals & Mining",
+    "industry": "Aluminium",
+    "screenerSlug": "HINDALCO/consolidated",
+    "aliases": ["hindalco", "hindalco industries"]
+  },
+  {
+    "name": "JSW Steel Ltd",
+    "ticker": "JSWSTEEL",
+    "bseCode": "500228",
+    "nseSymbol": "JSWSTEEL",
+    "sector": "Metals & Mining",
+    "industry": "Steel Manufacturing",
+    "screenerSlug": "JSWSTEEL/consolidated",
+    "aliases": ["jsw steel", "jswsteel", "jsw"]
+  },
+  {
+    "name": "Hero MotoCorp Ltd",
+    "ticker": "HEROMOTOCO",
+    "bseCode": "500182",
+    "nseSymbol": "HEROMOTOCO",
+    "sector": "Automobile",
+    "industry": "Two-Wheelers",
+    "screenerSlug": "HEROMOTOCO/consolidated",
+    "aliases": ["hero", "hero motocorp"]
+  },
+  {
+    "name": "Coal India Ltd",
+    "ticker": "COALINDIA",
+    "bseCode": "533278",
+    "nseSymbol": "COALINDIA",
+    "sector": "Metals & Mining",
+    "industry": "Coal Mining",
+    "screenerSlug": "COALINDIA/consolidated",
+    "aliases": ["coal india", "coalindia"]
+  },
+  {
+    "name": "Bajaj Finserv Ltd",
+    "ticker": "BAJAJFINSV",
+    "bseCode": "532978",
+    "nseSymbol": "BAJAJFINSV",
+    "sector": "Banking & Finance",
+    "industry": "Financial Services Holding",
+    "screenerSlug": "BAJAJFINSV/consolidated",
+    "aliases": ["bajaj finserv", "bajajfinsv"]
+  },
+  {
+    "name": "SBI Life Insurance Company Ltd",
+    "ticker": "SBILIFE",
+    "bseCode": "540719",
+    "nseSymbol": "SBILIFE",
+    "sector": "Insurance",
+    "industry": "Life Insurance",
+    "screenerSlug": "SBILIFE/consolidated",
+    "aliases": ["sbi life", "sbilife"]
+  },
+  {
+    "name": "Pidilite Industries Ltd",
+    "ticker": "PIDILITIND",
+    "bseCode": "500331",
+    "nseSymbol": "PIDILITIND",
+    "sector": "Chemicals",
+    "industry": "Adhesives / Specialty Chemicals",
+    "screenerSlug": "PIDILITIND/consolidated",
+    "aliases": ["pidilite", "fevicol", "pidilitind"]
+  },
+  {
+    "name": "Godrej Consumer Products Ltd",
+    "ticker": "GODREJCP",
+    "bseCode": "532424",
+    "nseSymbol": "GODREJCP",
+    "sector": "FMCG",
+    "industry": "Personal Care / Household Products",
+    "screenerSlug": "GODREJCP/consolidated",
+    "aliases": ["godrej", "godrej consumer", "godrejcp"]
+  },
+  {
+    "name": "Havells India Ltd",
+    "ticker": "HAVELLS",
+    "bseCode": "517354",
+    "nseSymbol": "HAVELLS",
+    "sector": "Consumer Discretionary",
+    "industry": "Electrical Equipment",
+    "screenerSlug": "HAVELLS/consolidated",
+    "aliases": ["havells", "havells india"]
+  },
+  {
+    "name": "Dmart (Avenue Supermarts Ltd)",
+    "ticker": "DMART",
+    "bseCode": "540376",
+    "nseSymbol": "DMART",
+    "sector": "Retail",
+    "industry": "Supermarket Chain",
+    "screenerSlug": "DMART/consolidated",
+    "aliases": ["dmart", "avenue supermarts", "d-mart"]
+  },
+  {
+    "name": "Adani Ports and Special Economic Zone Ltd",
+    "ticker": "ADANIPORTS",
+    "bseCode": "532921",
+    "nseSymbol": "ADANIPORTS",
+    "sector": "Infrastructure",
+    "industry": "Port Operations",
+    "screenerSlug": "ADANIPORTS/consolidated",
+    "aliases": ["adani ports", "adaniports"]
+  },
+  {
+    "name": "Trent Ltd",
+    "ticker": "TRENT",
+    "bseCode": "500251",
+    "nseSymbol": "TRENT",
+    "sector": "Consumer",
+    "industry": "Retail / Fashion",
+    "screenerSlug": "TRENT/consolidated",
+    "aliases": ["trent", "trent limited", "westside", "zudio"]
+  },
+  {
+    "name": "Bharat Electronics Ltd",
+    "ticker": "BEL",
+    "bseCode": "500049",
+    "nseSymbol": "BEL",
+    "sector": "Defence",
+    "industry": "Defence Electronics",
+    "screenerSlug": "BEL/consolidated",
+    "aliases": ["bel", "bharat electronics"]
+  },
+  {
+    "name": "HAL",
+    "ticker": "HAL",
+    "bseCode": "541154",
+    "nseSymbol": "HAL",
+    "sector": "Defence",
+    "industry": "Aerospace & Defence",
+    "screenerSlug": "HAL/consolidated",
+    "aliases": ["hal", "hindustan aeronautics"]
+  },
+  {
+    "name": "Indian Railway Catering and Tourism Corporation Ltd",
+    "ticker": "IRCTC",
+    "bseCode": "542830",
+    "nseSymbol": "IRCTC",
+    "sector": "Travel & Tourism",
+    "industry": "Railway Ticketing & Catering",
+    "screenerSlug": "IRCTC/consolidated",
+    "aliases": ["irctc", "indian railway catering"]
+  },
+  {
+    "name": "Tata Power Company Ltd",
+    "ticker": "TATAPOWER",
+    "bseCode": "500400",
+    "nseSymbol": "TATAPOWER",
+    "sector": "Power",
+    "industry": "Electric Utilities",
+    "screenerSlug": "TATAPOWER/consolidated",
+    "aliases": ["tata power", "tatapower"]
+  },
+  {
+    "name": "Vedanta Ltd",
+    "ticker": "VEDL",
+    "bseCode": "500295",
+    "nseSymbol": "VEDL",
+    "sector": "Metals & Mining",
+    "industry": "Diversified Mining",
+    "screenerSlug": "VEDL/consolidated",
+    "aliases": ["vedanta", "vedl", "vedanta limited"]
+  },
+  {
+    "name": "Adani Green Energy Ltd",
+    "ticker": "ADANIGREEN",
+    "bseCode": "541450",
+    "nseSymbol": "ADANIGREEN",
+    "sector": "Renewable Energy",
+    "industry": "Solar & Wind Energy",
+    "screenerSlug": "ADANIGREEN/consolidated",
+    "aliases": ["adani green", "adanigreen"]
+  },
+  {
+    "name": "SBI Cards and Payment Services Ltd",
+    "ticker": "SBICARD",
+    "bseCode": "543066",
+    "nseSymbol": "SBICARD",
+    "sector": "Financial Services",
+    "industry": "Credit Cards",
+    "screenerSlug": "SBICARD/consolidated",
+    "aliases": ["sbi card", "sbicard", "sbi cards"]
+  },
+  {
+    "name": "Page Industries Ltd",
+    "ticker": "PAGEIND",
+    "bseCode": "532827",
+    "nseSymbol": "PAGEIND",
+    "sector": "Consumer",
+    "industry": "Textiles / Innerwear",
+    "screenerSlug": "PAGEIND/consolidated",
+    "aliases": ["page industries", "jockey india"]
+  },
+  {
+    "name": "Bajaj Holdings & Investment Ltd",
+    "ticker": "BAJAJHLDNG",
+    "bseCode": "500490",
+    "nseSymbol": "BAJAJHLDNG",
+    "sector": "Financial Services",
+    "industry": "Investment Holding",
+    "screenerSlug": "BAJAJHLDNG/consolidated",
+    "aliases": ["bajaj holdings", "bajajhldng"]
+  },
+  {
+    "name": "Indian Oil Corporation Ltd",
+    "ticker": "IOC",
+    "bseCode": "530965",
+    "nseSymbol": "IOC",
+    "sector": "Oil & Gas",
+    "industry": "Oil Refining & Marketing",
+    "screenerSlug": "IOC/consolidated",
+    "aliases": ["ioc", "indian oil", "indian oil corporation"]
+  },
+  {
+    "name": "Bharat Petroleum Corporation Ltd",
+    "ticker": "BPCL",
+    "bseCode": "500547",
+    "nseSymbol": "BPCL",
+    "sector": "Oil & Gas",
+    "industry": "Oil Refining & Marketing",
+    "screenerSlug": "BPCL/consolidated",
+    "aliases": ["bpcl", "bharat petroleum"]
+  },
+  {
+    "name": "ONGC Ltd",
+    "ticker": "ONGC",
+    "bseCode": "500312",
+    "nseSymbol": "ONGC",
+    "sector": "Oil & Gas",
+    "industry": "Oil Exploration",
+    "screenerSlug": "ONGC/consolidated",
+    "aliases": ["ongc", "oil and natural gas"]
+  },
+  {
+    "name": "Interglobe Aviation Ltd",
+    "ticker": "INDIGO",
+    "bseCode": "539448",
+    "nseSymbol": "INDIGO",
+    "sector": "Aviation",
+    "industry": "Airlines",
+    "screenerSlug": "INDIGO/consolidated",
+    "aliases": ["indigo", "interglobe aviation", "indigo airlines"]
+  },
+  {
+    "name": "Dabur India Ltd",
+    "ticker": "DABUR",
+    "bseCode": "500096",
+    "nseSymbol": "DABUR",
+    "sector": "FMCG",
+    "industry": "Personal & Health Care",
+    "screenerSlug": "DABUR/consolidated",
+    "aliases": ["dabur", "dabur india"]
+  },
+  {
+    "name": "Marico Ltd",
+    "ticker": "MARICO",
+    "bseCode": "531642",
+    "nseSymbol": "MARICO",
+    "sector": "FMCG",
+    "industry": "Hair & Skin Care",
+    "screenerSlug": "MARICO/consolidated",
+    "aliases": ["marico", "parachute", "saffola"]
+  },
+  {
+    "name": "Berger Paints India Ltd",
+    "ticker": "BERGEPAINT",
+    "bseCode": "509480",
+    "nseSymbol": "BERGEPAINT",
+    "sector": "Consumer",
+    "industry": "Paints & Coatings",
+    "screenerSlug": "BERGEPAINT/consolidated",
+    "aliases": ["berger paints", "bergepaint"]
+  },
+  {
+    "name": "Info Edge (India) Ltd",
+    "ticker": "NAUKRI",
+    "bseCode": "532777",
+    "nseSymbol": "NAUKRI",
+    "sector": "Internet & Technology",
+    "industry": "Online Classifieds",
+    "screenerSlug": "NAUKRI/consolidated",
+    "aliases": ["naukri", "info edge", "naukri.com"]
+  },
+  {
+    "name": "Varun Beverages Ltd",
+    "ticker": "VBL",
+    "bseCode": "540180",
+    "nseSymbol": "VBL",
+    "sector": "FMCG",
+    "industry": "Beverages",
+    "screenerSlug": "VBL/consolidated",
+    "aliases": ["varun beverages", "vbl", "pepsi bottler"]
+  },
+  {
+    "name": "Dixon Technologies (India) Ltd",
+    "ticker": "DIXON",
+    "bseCode": "540699",
+    "nseSymbol": "DIXON",
+    "sector": "Electronics",
+    "industry": "Contract Manufacturing",
+    "screenerSlug": "DIXON/consolidated",
+    "aliases": ["dixon", "dixon technologies"]
+  },
+  {
+    "name": "PI Industries Ltd",
+    "ticker": "PIIND",
+    "bseCode": "523642",
+    "nseSymbol": "PIIND",
+    "sector": "Chemicals",
+    "industry": "Agrochemicals",
+    "screenerSlug": "PIIND/consolidated",
+    "aliases": ["pi industries", "piind"]
+  },
+  {
+    "name": "Polycab India Ltd",
+    "ticker": "POLYCAB",
+    "bseCode": "542652",
+    "nseSymbol": "POLYCAB",
+    "sector": "Electricals",
+    "industry": "Wires & Cables",
+    "screenerSlug": "POLYCAB/consolidated",
+    "aliases": ["polycab", "polycab india"]
+  },
+  {
+    "name": "Persistent Systems Ltd",
+    "ticker": "PERSISTENT",
+    "bseCode": "533179",
+    "nseSymbol": "PERSISTENT",
+    "sector": "Information Technology",
+    "industry": "IT Services",
+    "screenerSlug": "PERSISTENT/consolidated",
+    "aliases": ["persistent", "persistent systems"]
+  },
+  {
+    "name": "Coforge Ltd",
+    "ticker": "COFORGE",
+    "bseCode": "532541",
+    "nseSymbol": "COFORGE",
+    "sector": "Information Technology",
+    "industry": "IT Services",
+    "screenerSlug": "COFORGE/consolidated",
+    "aliases": ["coforge", "niit technologies"]
+  },
+  {
+    "name": "Max Healthcare Institute Ltd",
+    "ticker": "MAXHEALTH",
+    "bseCode": "543220",
+    "nseSymbol": "MAXHEALTH",
+    "sector": "Healthcare",
+    "industry": "Hospitals",
+    "screenerSlug": "MAXHEALTH/consolidated",
+    "aliases": ["max healthcare", "maxhealth"]
+  },
+  {
+    "name": "Cholamandalam Investment and Finance Company Ltd",
+    "ticker": "CHOLAFIN",
+    "bseCode": "511243",
+    "nseSymbol": "CHOLAFIN",
+    "sector": "Financial Services",
+    "industry": "Vehicle Finance / NBFC",
+    "screenerSlug": "CHOLAFIN/consolidated",
+    "aliases": ["chola finance", "cholamandalam", "cholafin"]
+  },
+  {
+    "name": "Shriram Finance Ltd",
+    "ticker": "SHRIRAMFIN",
+    "bseCode": "511218",
+    "nseSymbol": "SHRIRAMFIN",
+    "sector": "Financial Services",
+    "industry": "Vehicle Finance / NBFC",
+    "screenerSlug": "SHRIRAMFIN/consolidated",
+    "aliases": ["shriram finance", "shriramfin", "shriram transport"]
+  },
+  {
+    "name": "Canara Bank",
+    "ticker": "CANBK",
+    "bseCode": "532483",
+    "nseSymbol": "CANBK",
+    "sector": "Banking",
+    "industry": "Public Sector Bank",
+    "screenerSlug": "CANBK/consolidated",
+    "aliases": ["canara bank", "canbk"]
+  },
+  {
+    "name": "Bank of Baroda",
+    "ticker": "BANKBARODA",
+    "bseCode": "532134",
+    "nseSymbol": "BANKBARODA",
+    "sector": "Banking",
+    "industry": "Public Sector Bank",
+    "screenerSlug": "BANKBARODA/consolidated",
+    "aliases": ["bank of baroda", "bob", "bankbaroda"]
+  },
+  {
+    "name": "PNB (Punjab National Bank)",
+    "ticker": "PNB",
+    "bseCode": "532461",
+    "nseSymbol": "PNB",
+    "sector": "Banking",
+    "industry": "Public Sector Bank",
+    "screenerSlug": "PNB/consolidated",
+    "aliases": ["pnb", "punjab national bank"]
+  }
+]
