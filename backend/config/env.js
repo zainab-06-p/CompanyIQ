@@ -43,6 +43,15 @@ const config = {
     appUrl: process.env.APP_URL || "http://localhost:5173",
   },
 
+  // CORS
+  cors: {
+    origin: (process.env.CORS_ORIGINS || "")
+      .split(",")
+      .map((v) => v.trim())
+      .filter(Boolean),
+    allowVercelPreviews: (process.env.ALLOW_VERCEL_PREVIEWS || "true").toLowerCase() === "true",
+  },
+
   // Supabase (Auth + user history)
   supabase: {
     url: process.env.SUPABASE_URL,

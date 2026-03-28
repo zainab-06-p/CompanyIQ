@@ -36,11 +36,28 @@ import { sanitizeInput } from "./middleware/inputValidation.js";
 const app = express();
 const isVercelRuntime = Boolean(process.env.VERCEL);
 
+const localOrigins = ["http://localhost:5173", "http://localhost:3000"];
+const configuredOrigins = Array.isArray(config.cors?.origin) ? config.cors.origin : [];
+const appOrigin = config.server?.appUrl ? [String(config.server.appUrl).replace(/\/$/, "")] : [];
+const allowedOrigins = [...new Set([...localOrigins, ...configuredOrigins, ...appOrigin])];
+const allowVercelPreviews = Boolean(config.cors?.allowVercelPreviews);
+
 // ─── Global Middleware ──────────────────────────────────────────────────
 
 app.use(
   cors({
-    origin: config.cors?.origin || ["http://localhost:5173", "http://localhost:3000"],
+    origin: (origin, callback) => {
+      // Allow server-to-server requests and same-origin requests without Origin header.
+      if (!origin) return callback(null, true);
+
+      if (allowedOrigins.includes(origin)) return callback(null, true);
+
+      if (allowVercelPreviews && /^https:\/\/[a-z0-9-]+\.vercel\.app$/i.test(origin)) {
+        return callback(null, true);
+      }
+
+      return callback(new Error(`CORS blocked for origin: ${origin}`));
+    },
     credentials: true,
   })
 );
