@@ -1,0 +1,55 @@
+services:
+  - type: web
+    name: companyiq-backend
+    runtime: node
+    rootDir: backend
+    plan: free
+    autoDeploy: true
+    buildCommand: npm ci
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: APP_URL
+        sync: false
+      - key: CORS_ORIGINS
+        sync: false
+      - key: ALLOW_VERCEL_PREVIEWS
+        value: "true"
+      - key: TINYFISH_API_KEY
+        sync: false
+      - key: TINYFISH_RETRIES
+        value: "1"
+      - key: TINYFISH_TIMEOUT_MS
+        value: "0"
+      - key: TINYFISH_BUDGET_ENABLED
+        value: "true"
+      - key: TINYFISH_BUDGET_FREE_SCORE_CALLS
+        value: "6"
+      - key: TINYFISH_BUDGET_QUICK_SCAN_CALLS
+        value: "10"
+      - key: TINYFISH_BUDGET_STANDARD_CALLS
+        value: "16"
+      - key: CACHE_TTL_HOURS
+        value: "24"
+      - key: FAST_MODE
+        value: "false"
+      - key: MAX_REPORT_MS
+        value: "2700000"
+      - key: FAST_AGENT_TIMEOUT_MS
+        value: "0"
+      - key: BACKGROUND_HYDRATION
+        value: "false"
+      - key: RAZORPAY_KEY_ID
+        sync: false
+      - key: RAZORPAY_KEY_SECRET
+        sync: false
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_ANON_KEY
+        sync: false
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        sync: false

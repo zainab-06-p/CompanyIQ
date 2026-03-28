@@ -86,10 +86,21 @@ Without TinyFish, the platform would lose real-time browser automation and much 
 
 - backend/: Express API, orchestrator, agents, engine modules, cache, DB
 - frontend/: Vite + React + TypeScript application
-- PROJECT_BRIEF.md: product framing and value proposition
-- 1. foundation of the hackathon and solution.md: problem fit and rationale
-- 2. implementation plan for critical issues.md: implementation details
-- 3. final execution plan.md: system execution and integration plan
+- render.yaml: Render blueprint for backend deployment
+- DEPLOY_RENDER_BACKEND.md: backend deployment and frontend cutover steps
+
+## Recommended Production Deployment
+
+Because TinyFish browser automation can run longer than typical serverless request windows, deploy as:
+
+- Frontend on Vercel
+- Backend on Render (always-on web service)
+
+Then set Vercel env variable:
+
+`VITE_API_BASE=https://<your-render-service>.onrender.com/api`
+
+Detailed steps are in `DEPLOY_RENDER_BACKEND.md`.
 
 ## Tech Stack
 
@@ -170,10 +181,7 @@ This command starts both:
 ## Documentation Index
 
 - README.md - primary project walkthrough
-- PROJECT_BRIEF.md - problem framing and solution pitch
-- 1. foundation of the hackathon and solution.md - TinyFish fit and business context
-- 2. implementation plan for critical issues.md - implementation details
-- 3. final execution plan.md - complete execution blueprint
+- DEPLOY_RENDER_BACKEND.md - production deployment with Render backend
 
 ## License
 
