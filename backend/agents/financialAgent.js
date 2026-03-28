@@ -19,17 +19,63 @@ import config from "../config/env.js";
  *
  * @param {object} company - Company object from companies.json
  * @param {function} [onProgress] - Progress callback: (message) => void
+ * @param {{liteMode?: boolean}} [options] - Optional execution mode flags
  * @returns {Promise<object>} - { profitAndLoss, balanceSheet, cashFlow, ratiosSummary, metadata }
  */
-export async function runFinancialAgent(company, onProgress) {
+export async function runFinancialAgent(company, onProgress, options = {}) {
   const { screenerSlug, name, ticker } = company;
   const baseUrl = `https://www.screener.in/company/${screenerSlug}/`;
+  const liteMode = Boolean(options.liteMode);
 
   console.log(`[FinancialAgent] Starting analysis for ${name} (${ticker})`);
   console.log(`[FinancialAgent] screenerSlug: ${screenerSlug}`);
   console.log(`[FinancialAgent] baseUrl: ${baseUrl}`);
+  console.log(`[FinancialAgent] liteMode: ${liteMode}`);
 
   onProgress?.(`Starting financial analysis for ${name}...`);
+
+  if (liteMode) {
+    onProgress?.("Running quick financial extraction mode...");
+    const quickResult = await Promise.allSettled([
+      callTinyFish(baseUrl, buildQuickGoal(name), {
+        browserProfile: "lite",
+        retries: config.tinyfish.defaultRetries,
+        onProgress: (msg) => onProgress?.(`[Quick Financial] ${msg}`),
+      }),
+    ]).then((r) => r[0]);
+
+    const quickData = extractResult(quickResult, "Quick Financial");
+    const totalSteps = quickResult.value?.stepCount || 0;
+    const totalDuration = quickResult.value?.durationMs || 0;
+
+    onProgress?.(`Quick financial extraction complete — ${totalSteps} steps in ${(totalDuration / 1000).toFixed(1)}s`);
+
+    const annualFromQuick = Array.isArray(quickData?.annual)
+      ? quickData.annual
+      : quickData?.latestAnnual
+        ? [quickData.latestAnnual]
+        : [];
+
+    return {
+      profitAndLoss: normalizePL({ quarterly: [], annual: annualFromQuick }),
+      balanceSheet: [],
+      cashFlow: [],
+      ratiosSummary: normalizeRatios({ ratiosSummary: quickData?.ratiosSummary || {} }),
+      metadata: {
+        agent: "financial",
+        company: ticker,
+        mode: "lite",
+        totalSteps,
+        totalDurationMs: totalDuration,
+        callResults: {
+          quick: {
+            steps: quickResult.value?.stepCount,
+            error: quickResult.value?.error || quickResult.reason?.message,
+          },
+        },
+      },
+    };
+  }
 
   // Keep Screener calls sequential to avoid upstream stream closures under burst load.
   console.log(`[FinancialAgent] Calling TinyFish for P&L...`);
@@ -186,6 +232,32 @@ Return as structured JSON with this exact format:
 }
 
 All monetary values in Crores. Ratios as plain numbers (not percentages for D/E, current ratio).`;
+}
+
+function buildQuickGoal(companyName) {
+  return `On this Screener.in page for ${companyName}, extract only a compact quick snapshot so the response is fast.
+
+Return JSON with this exact structure:
+{
+  "ratiosSummary": {
+    "roe": 8.4,
+    "roce": 7.2,
+    "debtToEquity": 0.4,
+    "currentRatio": 2.3,
+    "pe": 24.5,
+    "pb": 3.2,
+    "dividendYield": 0.7,
+    "evEbitda": 12.8,
+    "marketCap": 198000,
+    "faceValue": 10
+  },
+  "annual": [
+    { "period": "Mar 2025", "revenue": 14091, "netProfit": 351 }
+  ]
+}
+
+Do not navigate deeply across multiple tabs. Prefer visible summary values from current page.
+All currency values in Crores.`;
 }
 
 // ─── Result Extraction & Normalization ──────────────────────────────────

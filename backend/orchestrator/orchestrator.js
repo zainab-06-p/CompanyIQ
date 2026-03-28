@@ -259,10 +259,13 @@ export async function runPipeline(userInput, tier = "free_score", sseRes = null,
     const deadlineAt = fastMode ? startTime + maxReportMs : Number.POSITIVE_INFINITY;
     const timeLeft = () => deadlineAt - Date.now();
     const shouldSkipHeavy = () => fastMode && timeLeft() < 5000;
+    const isVercelRuntime = Boolean(process.env.VERCEL);
+    const useVercelLiteFreeTier = isVercelRuntime && tier === "free_score";
     const currentAgentTimeoutMs = fastMode
       ? Math.min(fastAgentTimeoutMs, Math.max(timeLeft() - 3000, 10000))
       : AGENT_TIMEOUT_MS;
-    const skipNonFinancialAgents = economyMode && tier === "free_score";
+    const skipNonFinancialAgents = (economyMode && tier === "free_score") || useVercelLiteFreeTier;
+    const agentErrors = {};
     let partial = false;
 
     // ── Step 2: Run agents in parallel ───────────────────────────────
@@ -277,11 +280,15 @@ export async function runPipeline(userInput, tier = "free_score", sseRes = null,
     // Financial agent (with circuit breaker)
     agentPromises.push(
       withOptionalTimeout(
-        runFinancialAgent(company, (msg) => progress.emit("financial", msg, 25)),
-        defaultTimeout,
+        runFinancialAgent(
+          company,
+          (msg) => progress.emit("financial", msg, 25),
+          { liteMode: useVercelLiteFreeTier }
+        ),
         currentAgentTimeoutMs,
         "Financial Agent"
       ).catch((err) => {
+          agentErrors.financial = err?.message || "Unknown financial agent error";
           if (fastMode && String(err.message || "").includes("timed out")) {
             console.warn("[Orchestrator] Financial agent deferred by fast window:", err.message);
           } else {
@@ -299,6 +306,7 @@ export async function runPipeline(userInput, tier = "free_score", sseRes = null,
           currentAgentTimeoutMs,
           "Legal Agent"
         ).catch((err) => {
+            agentErrors.legal = err?.message || "Unknown legal agent error";
             if (fastMode && String(err.message || "").includes("timed out")) {
               console.warn("[Orchestrator] Legal agent deferred by fast window:", err.message);
             } else {
@@ -319,6 +327,7 @@ export async function runPipeline(userInput, tier = "free_score", sseRes = null,
           currentAgentTimeoutMs,
           "Sentiment Agent"
         ).catch((err) => {
+            agentErrors.sentiment = err?.message || "Unknown sentiment agent error";
             if (fastMode && String(err.message || "").includes("timed out")) {
               console.warn("[Orchestrator] Sentiment agent deferred by fast window:", err.message);
             } else {
@@ -339,6 +348,7 @@ export async function runPipeline(userInput, tier = "free_score", sseRes = null,
           currentAgentTimeoutMs,
           "Insider Agent"
         ).catch((err) => {
+            agentErrors.insider = err?.message || "Unknown insider agent error";
             if (fastMode && String(err.message || "").includes("timed out")) {
               console.warn("[Orchestrator] Insider agent deferred by fast window:", err.message);
             } else {
@@ -359,6 +369,7 @@ export async function runPipeline(userInput, tier = "free_score", sseRes = null,
           currentAgentTimeoutMs,
           "Annual Report Agent"
         ).catch((err) => {
+            agentErrors.annualReport = err?.message || "Unknown annual report agent error";
             if (fastMode && String(err.message || "").includes("timed out")) {
               console.warn("[Orchestrator] Annual Report agent deferred by fast window:", err.message);
             } else {
@@ -582,7 +593,9 @@ export async function runPipeline(userInput, tier = "free_score", sseRes = null,
         partial,
         economyMode,
         fastMode,
+        vercelLiteMode: useVercelLiteFreeTier,
         tinyfishBudget: getTinyFishBudgetSnapshot(),
+        agentErrors,
         agentSteps: {
           financial: financialData?.metadata?.totalSteps || 0,
           legal: legalData?.metadata?.totalSteps || 0,
