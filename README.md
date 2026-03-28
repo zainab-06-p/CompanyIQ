@@ -1,65 +1,104 @@
 # CompanyIQ
 
-CompanyIQ is an AI-powered due diligence platform for Indian listed companies.
-It combines parallel web automation agents, a scoring engine, and a report synthesis layer to generate investment-grade company intelligence in minutes.
+CompanyIQ is an AI-powered company due diligence platform for Indian equities.
+It uses parallel agents, deep scoring engines, and browser automation to generate clear, explainable investment intelligence in minutes instead of weeks.
 
-## Why this project exists
+## Public Repository
 
-Traditional due diligence is expensive, slow, and often inaccessible to retail investors or small teams. CompanyIQ compresses that process into an automated workflow that can:
+GitHub: https://github.com/zainab-06-p/CompanyIQ
 
-- collect financial, legal, and sentiment signals from multiple public sources
-- normalize and score those signals through engine modules
-- produce a structured report with explainable insights and red flags
+## Team
 
-## Why TinyFish API is central to CompanyIQ
+- Zainab Pirjade - https://github.com/zainab-06-p
+- Adi Inamdar - https://github.com/Adi-Evolve
 
-Most critical data sources in this workflow are dynamic, paginated, login-bound, or rendered through complex browser flows.
-TinyFish is used because this project needs real browser automation, not simple static scraping.
+## Problem Statement
 
-TinyFish solves key constraints for this use case:
+High-quality company due diligence is still difficult for most investors and operators.
 
-- Browser-first extraction for dynamic websites
-- Multi-step automation (search, navigate, paginate, extract)
-- Parallel execution across multiple data domains
-- Streaming progress events for real-time UX
+- Manual research is slow and fragmented across many websites.
+- Critical sources are dynamic, paginated, and often hard to extract reliably.
+- Professional-grade analysis is expensive, making it inaccessible to many users.
+- Raw data alone is not enough; users need explainable scoring and decision support.
 
-### TinyFish integration in this repository
+In short, users need a single system that can discover, structure, score, and explain company risk/opportunity from live web sources.
 
-- Core wrapper: `backend/agents/tinyfish.js`
-- Financial extraction flow: `backend/agents/financialAgent.js`
-- Legal/compliance extraction flow: `backend/agents/legalAgent.js`
-- News and sentiment extraction flow: `backend/agents/sentimentAgent.js`
-- End-to-end orchestration: `backend/orchestrator/orchestrator.js`
+## Our Solution
 
-The wrapper uses TinyFish SSE automation endpoints and supports retries, progress callbacks, and budget-aware call limits.
+CompanyIQ provides a full-stack due diligence workflow:
 
-## High-level architecture
+1. Collects live data using specialized domain agents.
+2. Runs quality checks and computes financial/legal/sentiment signals.
+3. Produces composite scores, red flags, and context-aware insights.
+4. Streams progress to the frontend in real time.
+5. Returns a structured report ready for decision-making.
 
-1. Frontend starts report generation and subscribes to progress events.
-2. Backend resolves company metadata and checks cache.
-3. Orchestrator dispatches domain agents in parallel.
-4. Agents call TinyFish for web automation + extraction.
-5. Engine modules compute ratios, quality checks, risk signals, and composite scores.
-6. Synthesis layer generates report narrative (when enabled by tier).
-7. Backend stores and serves report output.
+## Why TinyFish API is mission-critical
 
-## Repository structure
+TinyFish is not an optional integration in this project. It is the core data access layer that makes the product feasible.
 
-- `backend/` Express API, orchestrator, domain agents, scoring engines, DB/cache
-- `frontend/` Vite + React + TypeScript UI
-- `PROJECT_BRIEF.md` product and hackathon framing
-- `1. foundation of the hackathon and solution.md` problem framing and fit
-- `2. implementation plan for critical issues.md` implementation direction
-- `3. final execution plan.md` execution and integration details
+### Why standard scraping is not enough
 
-## Tech stack
+- Important pages are JavaScript-rendered.
+- Data is spread across multi-step workflows (search, navigation, pagination, filtering).
+- Some workflows require browser-like interaction patterns.
+
+### What TinyFish enables for CompanyIQ
+
+- Real browser automation for dynamic financial/legal data paths.
+- Multi-step extraction with reliable structured output.
+- Parallel runs across multiple sources and agent types.
+- Streaming events (SSE) that power the real-time progress UI.
+- Better reliability for production-like extraction workflows.
+
+### TinyFish in this codebase
+
+- Core integration wrapper: backend/agents/tinyfish.js
+- Financial agent integration: backend/agents/financialAgent.js
+- Legal agent integration: backend/agents/legalAgent.js
+- Sentiment agent integration: backend/agents/sentimentAgent.js
+- Orchestration and budget control: backend/orchestrator/orchestrator.js
+
+Without TinyFish, the platform would lose real-time browser automation and much of the live-source extraction depth required by the problem.
+
+## Core Features
+
+- Parallel agent execution for faster report generation.
+- Financial, legal, sentiment, insider, and annual report analysis modules.
+- 30+ analysis and scoring engines across quality, risk, valuation, and context.
+- Composite CompanyIQ score with red flag detection.
+- Tiered report modes (free_score, quick_scan, standard).
+- SSE-based progress events for transparent long-running workflows.
+- Caching and in-flight request handling for performance.
+- Frontend report views for analysis, trends, and comparisons.
+
+## High-level Architecture
+
+1. Frontend triggers report generation and subscribes to progress updates.
+2. Backend resolves company identity and checks cache.
+3. Orchestrator runs selected agents in parallel.
+4. Agents call TinyFish to execute browser automation goals.
+5. Engine layer computes scores, anomalies, and red flags.
+6. Optional synthesis generates narrative insights.
+7. Report is persisted and returned to UI.
+
+## Repository Structure
+
+- backend/: Express API, orchestrator, agents, engine modules, cache, DB
+- frontend/: Vite + React + TypeScript application
+- PROJECT_BRIEF.md: product framing and value proposition
+- 1. foundation of the hackathon and solution.md: problem fit and rationale
+- 2. implementation plan for critical issues.md: implementation details
+- 3. final execution plan.md: system execution and integration plan
+
+## Tech Stack
 
 - Backend: Node.js (ESM), Express
 - Frontend: React, TypeScript, Vite
-- Data/storage: SQLite (via `better-sqlite3`), cache layer
-- APIs: TinyFish Web Agent API, optional LLM synthesis providers
+- Storage: SQLite (better-sqlite3)
+- Data orchestration: TinyFish API + local scoring pipeline
 
-## Local setup
+## Local Development Setup
 
 ### 1. Prerequisites
 
@@ -78,20 +117,15 @@ npm install --prefix frontend
 
 ### 3. Configure environment
 
-Create `backend/.env` (or edit existing local file) with values like:
+Copy backend/.env.example to backend/.env and fill your keys.
+
+Minimum required values:
 
 ```env
-# TinyFish
 TINYFISH_API_KEY=your_tinyfish_api_key
-
-# Server
 PORT=3001
 NODE_ENV=development
-
-# App URL
 APP_URL=http://localhost:5173
-
-# TinyFish controls
 TINYFISH_RETRIES=1
 TINYFISH_TIMEOUT_MS=90000
 TINYFISH_BUDGET_ENABLED=true
@@ -100,9 +134,9 @@ TINYFISH_BUDGET_QUICK_SCAN_CALLS=10
 TINYFISH_BUDGET_STANDARD_CALLS=16
 ```
 
-Do not commit real API keys. Keep secrets in local env files only.
+Security note: Never commit real API keys.
 
-### 4. Run the app
+### 4. Run locally
 
 From project root:
 
@@ -110,59 +144,38 @@ From project root:
 npm run dev
 ```
 
-This starts:
+This command starts both:
 
-- backend API from `backend/server.js`
-- frontend dev server from `frontend`
+- backend API (backend/server.js)
+- frontend Vite app (frontend)
 
-## Request flow walkthrough
+## Request Flow Walkthrough
 
-1. User enters company name/ticker in frontend.
-2. Frontend starts generation and listens to SSE progress.
-3. Backend `orchestrator` resolves ticker and tier.
-4. Financial, legal, and sentiment agents run in parallel.
-5. Each agent issues TinyFish browser automation goals for target sites.
-6. Extracted outputs are validated and transformed.
-7. Scoring engines produce pillar and composite scores.
-8. Optional synthesis composes narrative insights.
-9. Final report is returned and rendered in UI.
+1. User submits a company name/ticker.
+2. Frontend opens a live progress stream.
+3. Orchestrator resolves entity and tier configuration.
+4. Financial/legal/sentiment (and tier-enabled) agents execute in parallel.
+5. TinyFish performs browser automation and extraction per source goal.
+6. Engine layer validates and scores extracted signals.
+7. System produces composite output, red flags, and narrative insights.
+8. Final report is returned and displayed.
 
-## Tiering model
+## Security and Operations Notes
 
-The pipeline supports multiple report tiers (example: `free_score`, `quick_scan`, `standard`) with different depth and API budget limits.
-Tiering is configured in orchestrator logic and affects what data is fetched and synthesized.
+- Keep backend/.env private.
+- Rotate API keys immediately if exposed.
+- Use budget controls to cap TinyFish cost per tier.
+- Enable auth/rate-limit middleware for production deployments.
 
-## Key backend modules
+## Documentation Index
 
-- `backend/orchestrator/orchestrator.js`: workflow coordinator
-- `backend/agents/`: source-specific extraction logic
-- `backend/engine/`: scoring and analysis engines
-- `backend/cache/cacheLayer.js`: cache and in-flight dedupe
-- `backend/db/database.js`: report persistence
-
-## API and progress behavior
-
-The backend emits streaming progress events during report generation to support real-time UI updates.
-TinyFish PROGRESS events are mapped to user-facing milestones so users can see extraction progress instead of waiting blindly.
-
-## Security and operational notes
-
-- Keep `backend/.env` private and rotate keys if exposed.
-- Enable rate limits and auth middleware in production deployments.
-- Use API budget limits to control TinyFish cost.
-- Validate external data before scoring or report output.
-
-## Current scope in this first push
-
-This first push is focused on the foundation:
-
-- core backend pipeline and agent orchestration
-- frontend app shell and report flow
-- TinyFish-centered extraction strategy
-- project documentation for setup and architecture
-
-Future upgrades can be pushed incrementally in separate commits/releases.
+- README.md - primary project walkthrough
+- PROJECT_BRIEF.md - problem framing and solution pitch
+- 1. foundation of the hackathon and solution.md - TinyFish fit and business context
+- 2. implementation plan for critical issues.md - implementation details
+- 3. final execution plan.md - complete execution blueprint
 
 ## License
 
-Add a license file (`LICENSE`) according to your preferred terms before public/commercial distribution.
+This project is licensed under the MIT License.
+See LICENSE for full text.
