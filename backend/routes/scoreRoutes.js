@@ -21,6 +21,7 @@ const router = Router();
 router.get("/latest/:company", freeTierLimiter, async (req, res) => {
   try {
     const { company } = req.params;
+    const forceRefresh = String(req.query.force || "").toLowerCase() === "true" || req.query.force === "1";
 
     if (!company || company.trim().length < 2) {
       return res.status(400).json({
@@ -29,7 +30,7 @@ router.get("/latest/:company", freeTierLimiter, async (req, res) => {
       });
     }
 
-    const report = await runPipeline(company.trim(), "free_score");
+    const report = await runPipeline(company.trim(), "free_score", null, { forceRefresh });
 
     if (report.error) {
       return res.status(404).json(report);
@@ -58,6 +59,7 @@ router.get("/latest/:company", freeTierLimiter, async (req, res) => {
 router.get("/:company", freeTierLimiter, async (req, res) => {
   try {
     const { company } = req.params;
+    const forceRefresh = String(req.query.force || "").toLowerCase() === "true" || req.query.force === "1";
 
     if (!company || company.trim().length < 2) {
       return res.status(400).json({
@@ -66,7 +68,7 @@ router.get("/:company", freeTierLimiter, async (req, res) => {
       });
     }
 
-    const report = await runPipeline(company.trim(), "free_score");
+    const report = await runPipeline(company.trim(), "free_score", null, { forceRefresh });
 
     if (report.error) {
       return res.status(404).json(report);

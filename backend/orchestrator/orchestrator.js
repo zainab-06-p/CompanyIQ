@@ -210,12 +210,16 @@ export async function runPipeline(userInput, tier = "free_score", sseRes = null,
   if (!forceRefresh) {
     const dbCached = getLatestReportByTier(company.ticker, tier);
     if (dbCached?.report && dbCached.created_at) {
+      const cachedSteps = Number(dbCached.report?.metadata?.totalSteps || 0);
+      const looksLikeFallbackOnly = cachedSteps <= 0;
       const createdAtMs = new Date(String(dbCached.created_at).replace(" ", "T") + "Z").getTime();
       const isFresh = Number.isFinite(createdAtMs) && Date.now() - createdAtMs <= cacheTtlMs;
-      if (isFresh) {
+      if (isFresh && !looksLikeFallbackOnly) {
         console.log(`[Orchestrator] DB CACHE HIT for ${company.ticker}:${tier} (created ${dbCached.created_at}) — returning cached report.`);
         setCache(fullCacheKey, dbCached.report);
         return dbCached.report;
+      } else if (isFresh && looksLikeFallbackOnly) {
+        console.log(`[Orchestrator] Skipping DB cache for ${company.ticker}:${tier} because cached report has zero TinyFish steps.`);
       } else {
         console.log(`[Orchestrator] DB cache STALE for ${company.ticker}:${tier} (created ${dbCached.created_at}, age ${Math.round((Date.now() - createdAtMs) / 60000)}min) — will run fresh.`);
       }
@@ -742,24 +746,29 @@ export async function runPipeline(userInput, tier = "free_score", sseRes = null,
     });
 
     // ── Persist to SQLite ────────────────────────────────────────────
-    try {
-      saveReport(company.ticker, tier, company.name, company.sector, composite.score, composite.rating, report);
-      saveScoreHistory(company.ticker, {
-        companyIQ: composite.score,
-        financial: financialScore.score,
-        legal: legalScore.score,
-        sentiment: sentimentScore.score,
-        deepAnalysis: deepAnalysisScore,
-      });
-      savePeerScore(company.ticker, company.sector, {
-        companyIQ: composite.score,
-        financial: financialScore.score,
-        legal: legalScore.score,
-        sentiment: sentimentScore.score,
-        deepAnalysis: deepAnalysisScore,
-      });
-    } catch (dbErr) {
-      console.error("[Orchestrator] DB persistence error (non-fatal):", dbErr.message);
+    const hasTinyFishSteps = Number(report.metadata?.totalSteps || 0) > 0;
+    if (hasTinyFishSteps) {
+      try {
+        saveReport(company.ticker, tier, company.name, company.sector, composite.score, composite.rating, report);
+        saveScoreHistory(company.ticker, {
+          companyIQ: composite.score,
+          financial: financialScore.score,
+          legal: legalScore.score,
+          sentiment: sentimentScore.score,
+          deepAnalysis: deepAnalysisScore,
+        });
+        savePeerScore(company.ticker, company.sector, {
+          companyIQ: composite.score,
+          financial: financialScore.score,
+          legal: legalScore.score,
+          sentiment: sentimentScore.score,
+          deepAnalysis: deepAnalysisScore,
+        });
+      } catch (dbErr) {
+        console.error("[Orchestrator] DB persistence error (non-fatal):", dbErr.message);
+      }
+    } else {
+      console.warn("[Orchestrator] Skipping DB persistence because TinyFish returned zero steps.");
     }
 
     // Close SSE if streaming
@@ -769,7 +778,7 @@ export async function runPipeline(userInput, tier = "free_score", sseRes = null,
     }
 
     // Persist full-quality report as canonical cache entry.
-    if (!report.metadata?.partial) {
+    if (!report.metadata?.partial && hasTinyFishSteps) {
       setCache(fullCacheKey, report);
     }
 
