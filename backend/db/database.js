@@ -17,11 +17,14 @@ import path from "path";
 import { fileURLToPath } from "url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const DB_PATH = path.join(__dirname, "..", "data", "companyiq.db");
+const isVercelRuntime = Boolean(process.env.VERCEL);
+const DB_PATH = isVercelRuntime
+  ? path.join("/tmp", "companyiq.db")
+  : path.join(__dirname, "..", "data", "companyiq.db");
 
 // Ensure data directory exists
 import fs from "fs";
-const dataDir = path.join(__dirname, "..", "data");
+const dataDir = isVercelRuntime ? "/tmp" : path.join(__dirname, "..", "data");
 if (!fs.existsSync(dataDir)) {
   fs.mkdirSync(dataDir, { recursive: true });
 }

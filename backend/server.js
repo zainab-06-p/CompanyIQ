@@ -34,6 +34,7 @@ import { getDbStats } from "./db/database.js";
 import { sanitizeInput } from "./middleware/inputValidation.js";
 
 const app = express();
+const isVercelRuntime = Boolean(process.env.VERCEL);
 
 // ─── Global Middleware ──────────────────────────────────────────────────
 
@@ -142,67 +143,70 @@ function validateEnv() {
 
 // ─── Start ──────────────────────────────────────────────────────────────
 
-const PORT = config.server.port || 3001;
+if (!isVercelRuntime) {
+  const PORT = config.server.port || 3001;
+  const envOk = validateEnv();
 
-const envOk = validateEnv();
-
-const server = app.listen(PORT, () => {
-  console.log(`
+  const server = app.listen(PORT, () => {
+    console.log(`
 ╔════════════════════════════════════════════╗
 ║  CompanyIQ API Server                      ║
 ║  Running on http://localhost:${PORT}          ║
 ║  Press Ctrl+C to stop                      ║
 ╚════════════════════════════════════════════╝
   `);
-  console.log("Endpoints:");
-  console.log(`  GET  /api/health                — Health check`);
-  console.log(`  GET  /api/score/:company        — Free CompanyIQ score`);
-  console.log(`  GET  /api/progress/:company     — SSE progress stream`);
-  console.log(`  POST /api/report/create-order   — Create Razorpay order`);
-  console.log(`  POST /api/report/generate       — Generate paid report`);
-  console.log(`  GET  /api/companies/search?q=   — Company autocomplete`);
-  console.log(`  GET  /api/companies/all         — All supported companies`);
-  console.log(`  GET  /api/companies/resolve/:x  — Resolve company`);
-  console.log(`  GET  /api/compare?a=&b=         — Compare two companies`);
-  console.log(`       /api/compare?...&cacheOnly=1 — Strict cache-only compare`);
-  console.log(`  POST /api/auth/register          — User registration`);
-  console.log(`  POST /api/auth/login             — User login`);
-  console.log(`  POST /api/auth/resend-confirmation — Resend verification email`);
-  console.log(`  GET  /api/auth/me                — Current user profile`);
-  console.log(`  POST /api/auth/select-plan       — Choose plan tier`);
-  console.log(`  GET  /api/watchlist               — Get watchlist`);
-  console.log(`  POST /api/watchlist/add           — Add to watchlist`);
-  console.log(`  DEL  /api/watchlist/:ticker       — Remove from watchlist`);
-  console.log(`  POST /api/portfolio/analyze       — Portfolio risk analysis`);
-  console.log(`       /api/portfolio/analyze?cacheOnly=1 — Strict cache-only portfolio`);
-  console.log(`  GET  /api/history                — User report history`);
-  console.log(`  POST /api/history/track          — Track report in history`);
-  console.log(`  POST /api/alerts/setup            — Setup BSE real-time alert`);
-  console.log(`  GET  /api/alerts                  — List active alerts`);
-  console.log(`  GET  /api/alerts/history/:ticker  — Alert trigger history`);
-  console.log("");
+    console.log("Endpoints:");
+    console.log(`  GET  /api/health                — Health check`);
+    console.log(`  GET  /api/score/:company        — Free CompanyIQ score`);
+    console.log(`  GET  /api/progress/:company     — SSE progress stream`);
+    console.log(`  POST /api/report/create-order   — Create Razorpay order`);
+    console.log(`  POST /api/report/generate       — Generate paid report`);
+    console.log(`  GET  /api/companies/search?q=   — Company autocomplete`);
+    console.log(`  GET  /api/companies/all         — All supported companies`);
+    console.log(`  GET  /api/companies/resolve/:x  — Resolve company`);
+    console.log(`  GET  /api/compare?a=&b=         — Compare two companies`);
+    console.log(`       /api/compare?...&cacheOnly=1 — Strict cache-only compare`);
+    console.log(`  POST /api/auth/register          — User registration`);
+    console.log(`  POST /api/auth/login             — User login`);
+    console.log(`  POST /api/auth/resend-confirmation — Resend verification email`);
+    console.log(`  GET  /api/auth/me                — Current user profile`);
+    console.log(`  POST /api/auth/select-plan       — Choose plan tier`);
+    console.log(`  GET  /api/watchlist               — Get watchlist`);
+    console.log(`  POST /api/watchlist/add           — Add to watchlist`);
+    console.log(`  DEL  /api/watchlist/:ticker       — Remove from watchlist`);
+    console.log(`  POST /api/portfolio/analyze       — Portfolio risk analysis`);
+    console.log(`       /api/portfolio/analyze?cacheOnly=1 — Strict cache-only portfolio`);
+    console.log(`  GET  /api/history                — User report history`);
+    console.log(`  POST /api/history/track          — Track report in history`);
+    console.log(`  POST /api/alerts/setup            — Setup BSE real-time alert`);
+    console.log(`  GET  /api/alerts                  — List active alerts`);
+    console.log(`  GET  /api/alerts/history/:ticker  — Alert trigger history`);
+    console.log("");
 
-  // Start BSE real-time alert monitor (background polling)
-  if (envOk || config.tinyfish?.apiKey) {
-    startAlertMonitor();
-  }
-});
-
-// ─── Graceful Shutdown ──────────────────────────────────────────────────
-
-function shutdown(signal) {
-  console.log(`\n[Server] ${signal} received — shutting down gracefully...`);
-  server.close(() => {
-    console.log("[Server] HTTP server closed.");
-    process.exit(0);
+    // Start BSE real-time alert monitor (background polling)
+    if (envOk || config.tinyfish?.apiKey) {
+      startAlertMonitor();
+    }
   });
-  setTimeout(() => {
-    console.error("[Server] Forced shutdown after timeout.");
-    process.exit(1);
-  }, 5000);
-}
 
-process.on("SIGTERM", () => shutdown("SIGTERM"));
-process.on("SIGINT", () => shutdown("SIGINT"));
+  // ─── Graceful Shutdown ────────────────────────────────────────────────
+  function shutdown(signal) {
+    console.log(`\n[Server] ${signal} received — shutting down gracefully...`);
+    server.close(() => {
+      console.log("[Server] HTTP server closed.");
+      process.exit(0);
+    });
+    setTimeout(() => {
+      console.error("[Server] Forced shutdown after timeout.");
+      process.exit(1);
+    }, 5000);
+  }
+
+  process.on("SIGTERM", () => shutdown("SIGTERM"));
+  process.on("SIGINT", () => shutdown("SIGINT"));
+} else {
+  // Serverless runtime: avoid starting long-running listeners.
+  validateEnv();
+}
 
 export default app;
