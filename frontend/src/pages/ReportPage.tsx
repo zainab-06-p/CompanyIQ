@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
-import { getFreeScore, getLatestReport } from "../utils/api.ts";
+import { API_BASE, getFreeScore, getLatestReport } from "../utils/api.ts";
 import ScoreGauge from "../components/ScoreGauge.tsx";
 import PillarBar from "../components/PillarBar.tsx";
 import RedFlagSection from "../components/RedFlagSection.tsx";
@@ -140,7 +140,7 @@ export default function ReportPage() {
         ? "watchlist"
         : "report";
 
-    fetch("/api/history/track", {
+    fetch(`${API_BASE}/history/track`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

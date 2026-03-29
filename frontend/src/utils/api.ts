@@ -2,7 +2,8 @@
  * API Client — centralized HTTP calls + SSE streaming
  */
 
-const BASE = (import.meta.env.VITE_API_BASE || "/api").replace(/\/$/, "");
+export const API_BASE = (import.meta.env.VITE_API_BASE || "/api").replace(/\/$/, "");
+const BASE = API_BASE;
 
 export interface CompanyResult {
   name: string;

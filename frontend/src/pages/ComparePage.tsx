@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { searchCompanies, compareCompanies, type CompanyResult } from "../utils/api.ts";
+import { API_BASE, searchCompanies, compareCompanies, type CompanyResult } from "../utils/api.ts";
 import ScoreGauge from "../components/ScoreGauge.tsx";
 import { ArrowLeft, Swords, Loader2, TrendingUp, TrendingDown, Minus, Trophy } from "lucide-react";
 
@@ -129,7 +129,7 @@ export default function ComparePage() {
     const nameA = result.companyA.company?.name || tickerA;
     const nameB = result.companyB.company?.name || tickerB;
 
-    fetch("/api/history/track", {
+    fetch(`${API_BASE}/history/track`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

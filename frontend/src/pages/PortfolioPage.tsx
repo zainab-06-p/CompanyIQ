@@ -8,6 +8,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { API_BASE } from "../utils/api.ts";
 import {
   PlusCircle,
   Trash2,
@@ -181,7 +182,7 @@ export default function PortfolioPage() {
     trackedPortfolioKeyRef.current = generatedKey;
 
     for (const h of result.portfolio.holdings) {
-      fetch("/api/history/track", {
+      fetch(`${API_BASE}/history/track`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

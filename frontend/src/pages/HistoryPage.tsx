@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft, History, ExternalLink } from "lucide-react";
-
-const BASE = "/api";
+import { API_BASE } from "../utils/api.ts";
 
 type HistoryItem = {
   id: string;
@@ -36,12 +35,24 @@ export default function HistoryPage() {
     const run = async () => {
       try {
         const token = localStorage.getItem("token");
-        const res = await fetch(`${BASE}/history?limit=100`, {
+        if (!token) {
+          setError("Please sign in again to view history.");
+          navigate("/auth", { replace: true });
+          return;
+        }
+
+        const res = await fetch(`${API_BASE}/history?limit=100`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         });
-        const data = await res.json();
+        const data = await res.json().catch(() => ({}));
+        if (res.status === 401) {
+          localStorage.removeItem("token");
+          localStorage.removeItem("user");
+          navigate("/auth", { replace: true });
+          return;
+        }
         if (!res.ok) {
           setError(data.message || "Failed to load history.");
           setLoading(false);
@@ -109,7 +120,11 @@ export default function HistoryPage() {
                   if (item.id) {
                     try {
                       const token = localStorage.getItem("token");
-                      const res = await fetch(`${BASE}/history/${item.id}`, {
+                      if (!token) {
+                        navigate("/auth", { replace: true });
+                        return;
+                      }
+                      const res = await fetch(`${API_BASE}/history/${item.id}`, {
                         headers: {
                           Authorization: `Bearer ${token}`,
                         },
